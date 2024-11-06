@@ -1,4 +1,4 @@
-﻿namespace ReadLine.Models
+﻿namespace ReadLine.Models.People
 {
     public class User
     {
@@ -6,6 +6,7 @@
         public string UserName { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
+        public string ProfileQuote { get; set; }
         public IEnumerable<Book> ReadBooks { get; set; }
         public IEnumerable<Book> FavoriteBooks { get; set; }
         public IEnumerable<Book> WishBooks { get; set; }

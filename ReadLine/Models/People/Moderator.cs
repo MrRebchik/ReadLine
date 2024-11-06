@@ -1,4 +1,4 @@
-﻿namespace ReadLine.Models
+﻿namespace ReadLine.Models.People
 {
     public class Moderator
     {
