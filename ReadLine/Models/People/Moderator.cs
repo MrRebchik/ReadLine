@@ -1,7 +1,7 @@
 ﻿namespace ReadLine.Models.People
 {
-    public class Moderator : User
+    public class Moderator : UserProfile
     {
-        public IEnumerable<ModerateRequest> ModerateRequests { get; set; }
+        public List<ModerateRequest> ModerateRequests { get; set; }
     }
 }

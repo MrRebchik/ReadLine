@@ -6,6 +6,6 @@
         public string Name { get; set; }
         public string Surname { get; set; }
         public string? Patronymic { get; set; } //Отчество
-        public IEnumerable<Book> Books { get; set; }
+        public List<Book> Books { get; set; }
     }
 }

@@ -30,6 +30,7 @@
         public long CategoryId { get; set; }
         public Category Category { get; set; }
         public AgeLimit AgeLimit { get; set; }
-        public IEnumerable<string> Tags { get; set; }
+        //public IEnumerable<BookTag> BookTags { get; set; }
+        public List<Tag> Tags { get; set; }
     }
 }

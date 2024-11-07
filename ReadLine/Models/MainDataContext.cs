@@ -10,11 +10,11 @@ namespace ReadLine.Models
         public DbSet<Category> Categories { get; set; }
         public DbSet<Author> Authors { get; set; }
         public DbSet<Tag> Tags { get; set; }
-        public DbSet<BookTag> BookTags { get; set; }
-        public DbSet<User> Users { get; set; }
-        public DbSet<UserReadBook> UserReadBooks { get; set; }
-        public DbSet<UserFavoriteBook> UserFavoriteBooks { get; set; }
-        public DbSet<UserWishBook> UserWishBooks { get; set; }
+        //public DbSet<BookTag> BookTags { get; set; }
+        public DbSet<UserProfile> UserProfiles { get; set; }
+        //public DbSet<UserReadBook> UserReadBooks { get; set; }
+        //public DbSet<UserFavoriteBook> UserFavoriteBooks { get; set; }
+        //public DbSet<UserWishBook> UserWishBooks { get; set; }
 
     }
 }
