@@ -2,6 +2,6 @@
 {
     public class Moderator : UserProfile
     {
-        public List<ModerateRequest> ModerateRequests { get; set; }
+        public List<ModerateRequest> ModerateRequests { get; set; } = [];
     }
 }

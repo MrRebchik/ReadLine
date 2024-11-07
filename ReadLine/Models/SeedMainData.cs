@@ -5,8 +5,9 @@ namespace ReadLine.Models
 {
     public static class SeedMainData
     {
-        public static void SeedMainDatabase(MainDataContext context)
+        public static void SeedMainDatabase(IApplicationBuilder app)
         {
+            MainDataContext context = app.ApplicationServices.CreateScope().ServiceProvider.GetRequiredService<MainDataContext>();
             context.Database.Migrate();
             if(context.Books.Count() == 0 && context.Authors.Count() == 0 && context.Categories.Count() == 0 && context.Tags.Count() == 0)
             {

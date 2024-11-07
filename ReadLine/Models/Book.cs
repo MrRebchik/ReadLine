@@ -31,6 +31,6 @@
         public Category Category { get; set; }
         public AgeLimit AgeLimit { get; set; }
         //public IEnumerable<BookTag> BookTags { get; set; }
-        public List<Tag> Tags { get; set; }
+        public List<Tag> Tags { get; set; } = [];
     }
 }

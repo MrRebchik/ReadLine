@@ -22,7 +22,10 @@ namespace ReadLine
 
             var app = builder.Build();
 
+
+            SeedMainData.SeedMainDatabase(app);
             // Configure the HTTP request pipeline.
+
             if (!app.Environment.IsDevelopment())
             {
                 app.UseExceptionHandler("/Error");
@@ -37,7 +40,6 @@ namespace ReadLine
 
             app.Run();
 
-            SeedMainData.SeedMainDatabase(app.Services.GetService<MainDataContext>());
         }
     }
 }
