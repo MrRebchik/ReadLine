@@ -1,8 +1,8 @@
 ﻿namespace ReadLine.Models.People
 {
-    public class ModereteRequest
+    public class ModerateRequest
     {
-        public long ModereteRequestId { get; set; }
+        public long ModerateRequestId { get; set; }
         public string BookTitle { get; set; }
         public string? Description { get; set; }
         public string? ApproveResourceLink { get; set; }

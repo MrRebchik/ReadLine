@@ -1,11 +1,11 @@
-﻿namespace ReadLine.Models.People
+﻿using Microsoft.AspNetCore.Identity;
+
+namespace ReadLine.Models.People
 {
     public class User
     {
-        public long UserId { get; set; }
-        public string UserName { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
+        public long IdentityUserId { get; set; }
+        public IdentityUser IdentityUser { get; set; }
         public string ProfileQuote { get; set; }
         public IEnumerable<Book> ReadBooks { get; set; }
         public IEnumerable<Book> FavoriteBooks { get; set; }

@@ -8,7 +8,7 @@ namespace ReadLine.Models
         public static void SeedMainDatabase(MainDataContext context)
         {
             context.Database.Migrate();
-            if(context.Books.Count() == 0 && context.Author.Count() == 0 && context.Categories.Count() == 0 && context.Tags.Count() == 0 && context.Users.Count() == 0)
+            if(context.Books.Count() == 0 && context.Authors.Count() == 0 && context.Categories.Count() == 0 && context.Tags.Count() == 0 && context.Users.Count() == 0)
             {
                 Category c1 = new Category() { Name = "Художественная литература"};
                 Category c2 = new Category() { Name = "Наука" };
@@ -54,7 +54,7 @@ namespace ReadLine.Models
                 };
 
                 context.Books.AddRange(b1, b2, b3);
-                context.Author.AddRange(a1, a2, a3);
+                context.Authors.AddRange(a1, a2, a3);
                 context.Categories.AddRange(c1, c2, c3);
                 context.Tags.AddRange(t1, t2, t3);
                 context.BookTags.AddRange(

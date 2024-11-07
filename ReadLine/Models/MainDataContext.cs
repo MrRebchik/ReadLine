@@ -8,7 +8,7 @@ namespace ReadLine.Models
         public MainDataContext(DbContextOptions<MainDataContext> opts) : base(opts) { }
         public DbSet<Book> Books { get; set; }
         public DbSet<Category> Categories { get; set; }
-        public DbSet<Author> Author { get; set; }
+        public DbSet<Author> Authors { get; set; }
         public DbSet<Tag> Tags { get; set; }
         public DbSet<BookTag> BookTags { get; set; }
         public DbSet<User> Users { get; set; }
