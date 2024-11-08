@@ -1,6 +1,7 @@
 using ReadLine.Models;
 using Microsoft.EntityFrameworkCore;using ReadLine.Models.People;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.OpenApi.Models;
 
 namespace ReadLine
 {
@@ -11,7 +12,7 @@ namespace ReadLine
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            builder.Services.AddRazorPages();
+            //builder.Services.AddRazorPages();
 
             builder.Services.AddDbContext<MainDataContext>(options => { options.UseSqlServer(builder.Configuration.GetConnectionString("MainDataConnection")); options.EnableSensitiveDataLogging(true); });
             builder.Services.AddDbContext<ModerateDataContext>(options => { options.UseSqlServer(builder.Configuration.GetConnectionString("ModerateDataConnection")); options.EnableSensitiveDataLogging(true); });
@@ -19,6 +20,10 @@ namespace ReadLine
             builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<IdentityContext>();
 
             builder.Services.AddControllers();
+            builder.Services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc("v1", new OpenApiInfo { Title = "WebApp", Version = "v1" });
+            });
 
             var app = builder.Build();
 
@@ -26,14 +31,23 @@ namespace ReadLine
             SeedMainData.SeedMainDatabase(app);
             // Configure the HTTP request pipeline.
 
-            if (!app.Environment.IsDevelopment())
-            {
-                app.UseExceptionHandler("/Error");
-            }
-            app.UseStaticFiles();
+            app.UseDeveloperExceptionPage();
 
             app.UseRouting();
 
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapGet("/", async context =>
+                {
+                    await context.Response.WriteAsync("Hello");
+                });
+                endpoints.MapControllers();
+            });
+            app.UseSwagger();
+            app.UseSwaggerUI(options =>
+            {
+                options.SwaggerEndpoint("/swagger/v1/swagger.json", "WebApp");
+            });
             app.Run();
 
         }
