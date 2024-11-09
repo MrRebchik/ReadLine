@@ -1,0 +1,34 @@
+﻿@using ReadLine.Models
+@model IEnumerable<Book>
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title >ReadLine</title>
+        <style>
+            li{
+            font-family: Montserrat Regular;
+            padding: 2em;
+            }
+        </style>
+    </head>
+    <body style ="background-color: beige;">
+    <h2 style="background-color: red">Список книг</h2>
+    <div>
+        <ul>
+            @foreach(var b in Model)
+            {
+                <li>
+                    <table>
+                        <tbody>
+                            <tr><th>Название</th><td>@b.Title</td></tr>
+                            <tr><th>Страницы</th><td>@b.PagesCount</td></tr>
+                        </tbody>
+                    </table>
+                </li>
+            }
+        </ul>
+            
+        </div>
+    </body>
+</html>

@@ -25,6 +25,8 @@ namespace ReadLine
                 options.SwaggerDoc("v1", new OpenApiInfo { Title = "WebApp", Version = "v1" });
             });
 
+            builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
+
             var app = builder.Build();
 
 
@@ -35,14 +37,8 @@ namespace ReadLine
 
             app.UseRouting();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapGet("/", async context =>
-                {
-                    await context.Response.WriteAsync("Hello");
-                });
-                endpoints.MapControllers();
-            });
+            app.MapDefaultControllerRoute();
+            app.MapControllers();
             app.UseSwagger();
             app.UseSwaggerUI(options =>
             {
