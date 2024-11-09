@@ -4,31 +4,30 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title >ReadLine</title>
-        <style>
-            li{
-            font-family: Montserrat Regular;
-            padding: 2em;
-            }
-        </style>
+    <meta charset="utf-8" />
+    <title >ReadLine</title>
+    <link href="/lib/twitter-bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
     </head>
-    <body style ="background-color: beige;">
-    <h2 style="background-color: red">Список книг</h2>
-    <div>
-        <ul>
-            @foreach(var b in Model)
-            {
-                <li>
-                    <table>
-                        <tbody>
-                            <tr><th>Название</th><td>@b.Title</td></tr>
-                            <tr><th>Страницы</th><td>@b.PagesCount</td></tr>
-                        </tbody>
-                    </table>
-                </li>
-            }
-        </ul>
-            
+<body style="background-color: beige;">
+    <h3 class="bg-primary text-white text-center p-2"> zalupa</h3>
+        <div>
+            <div class="row" style="align-content: center;">
+                <h1 style="align-content: center; background-color: beige;">ReadLine</h1>
+            </div>
+            <div style="background-color: white">
+                @for(int i = 0; i < (Model.Count()/4)+1; i++)
+                {
+                    <div class="row">
+                        @foreach(var b in Model.Skip(i).Take(4))
+                        {
+                            <div class="col-md-4">
+                                <h3>@b.Title</h3>
+                                <p>@b.PagesCount стр.</p>
+                            </div>
+                        }
+                    </div>
+                }
+            </div>
         </div>
     </body>
 </html>
