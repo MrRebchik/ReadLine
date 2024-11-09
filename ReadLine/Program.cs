@@ -34,6 +34,8 @@ namespace ReadLine
             // Configure the HTTP request pipeline.
 
             app.UseDeveloperExceptionPage();
+            app.UseStatusCodePages();
+            app.UseStaticFiles();
 
             app.UseRouting();
 
