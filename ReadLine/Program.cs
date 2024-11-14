@@ -15,7 +15,8 @@ namespace ReadLine
             //builder.Services.AddRazorPages();
 
             builder.Services.AddDbContext<MainDataContext>(options => { options.UseSqlServer(builder.Configuration.GetConnectionString("MainDataConnection")); options.EnableSensitiveDataLogging(true); });
-            builder.Services.AddDbContext<ModerateDataContext>(options => { options.UseSqlServer(builder.Configuration.GetConnectionString("ModerateDataConnection")); options.EnableSensitiveDataLogging(true); });
+            builder.Services.AddDbContext<ModerateDataContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("ModerateDataConnection")));
+            builder.Services.AddDbContext<ProfileContext>(options => { options.UseSqlServer(builder.Configuration.GetConnectionString("ProfileConnection")); options.EnableSensitiveDataLogging(true); });
             builder.Services.AddDbContext<IdentityContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("IdentityConnection")));
             builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<IdentityContext>();
 
