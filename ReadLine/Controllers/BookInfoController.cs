@@ -10,8 +10,14 @@ namespace ReadLine.Controllers
         public BookInfoController(MainDataContext context) { this.context = context; }
         public async Task<IActionResult> Index(long id)
         {
-            var book = await context.Books.Include(b => b.Author).Where(b => b.BookId == id).FirstOrDefaultAsync();
-            return View(await context.Books.FindAsync(id));
+            var book = context.Books.Include(b => b.Author).Include(b => b.Tags).Include(b => b.Category).First(b => b.BookId == id);
+            foreach (var t in book.Tags)
+            {
+                t.Books = null;
+            }
+            book.Category.Books = null;
+            book.Author.Books = null;
+            return View(book);
         }
     }
 }
