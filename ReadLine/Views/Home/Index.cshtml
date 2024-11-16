@@ -1,28 +1,42 @@
 ﻿@model IEnumerable<Book>
-
-<div class="row align-items-start">
+<div class="row">
+    <h2 style="margin: 20px;">Каталог</h2>
+    <hr />
+</div>
+<div class="row">
     <div class="col-md-2">
         <p>Menu</p>
     </div>
     <div class="col-md-10 align-items-center" style="background-color: white; width: 70%;">
+        <nav class="navbar navbar-expand-lg" style="margin: 16px;">
+            <div class="container-fluid">
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Поиск" aria-label="Поиск">
+                    <button class="btn btn-outline-success" type="submit">Поиск</button>
+                </form>
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Упорядочить
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">По алфавиту</a></li>
+                        <li><a class="dropdown-item" href="#">По количеству страниц</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+        </nav>
         @for(int i = 0; i < (Model.Count()/4)+1; i++)
         {
             <div class="row">
             @foreach(var b in Model.Skip(i).Take(4))
             {
-                <div class="card" style="width: 12rem;">
-                <img src="/img/default_cover.png" class="card-img-top" alt="Обложка отсутствует">
+                <div class="card" style="width: 12rem; margin-inline: 30px 0px;">
+                    <img src="/img/default_cover.png" class="card-img-top rounded-2" alt="Обложка отсутствует" style="margin-top: 10px;">
                     <div class="card-body">
-                            @if(b.Title.Length > 30)
-                            {
-                                <a asp-action="OpenBookPage" asp-route-itemid="@b.BookId" class="card-link">@(b.Title.Substring(0, 30).TrimEnd() + "...") </a>
-                            } else
-                            {
-                                <a asp-action="OpenBookPage" asp-route-itemid="@b.BookId" class="card-link">@b.Title </a>
-                            }
-                            <p class="card-text">@(b.Author.Surname + " " + b.Author.Name)</p>
-                    <p class="card-text">@b.PagesCount стр.</p>
-                        @* <a href="#" class="btn btn-primary">Go somewhere</a> *@
+                        <a asp-action="OpenBookPage" asp-route-itemid="@b.BookId" class="d-inline-block text-truncate" style="max-width: 150px;">@b.Title </a>
+                        <p class="card-text">@(b.Author.Surname + " " + b.Author.Name)</p>
+                        <p class="card-text">@b.PagesCount стр.</p>
                     </div>
                 </div>
             }

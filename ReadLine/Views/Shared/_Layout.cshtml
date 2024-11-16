@@ -2,18 +2,30 @@
 
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>ReadLine</title>
     <link href="/lib/twitter-bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 </head>
-<body>
-    <nav class="navbar bg-warning" style="--bs-bg-opacity: .1;">
-        <div class="container-fluid">
-            <span class="navbar-brand">ReadLine</span>
+<body style="background: #f0ebe5;">
+    <div class="container-fluid" style="padding: 0">
+        <div>
+            <nav class="navbar " @* bg-warning *@ @* style="--bs-bg-opacity: .1;" *@>
+                <div class="container-fluid" style="height: 70px;">
+                    <a href="/Home/Index" class="navbar-brand position-absolute top-50 start-50 translate-middle">
+                        <img class="position-absolute top-50 start-50 translate-middle" src="/img/brand_bg_img.png" style="height: 100px; width: 360px" />
+                        <span class="fs-1 position-absolute top-50 start-50 translate-middle">ReadLine</span>
+                    </a>
+                    
+                </div>
+            </nav>
         </div>
-    </nav>
-    <div class="rounded-10">
-        @RenderBody()
+        
+        <div class="rounded-10 bg-light-subtle" style="margin-top: 20px; min-height: 800px;">
+            <div  style="margin-inline: 70px 70px;">
+                @RenderBody()
+            </div>
+        </div>
+        
     </div>
 </body>
 </html>

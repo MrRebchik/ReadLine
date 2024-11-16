@@ -27,6 +27,7 @@ namespace ReadLine
             });
 
             builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
+            builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 
             var app = builder.Build();
 
@@ -42,6 +43,7 @@ namespace ReadLine
 
             app.MapDefaultControllerRoute();
             app.MapControllers();
+            app.MapRazorPages();
             app.UseSwagger();
             app.UseSwaggerUI(options =>
             {
