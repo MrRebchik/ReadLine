@@ -16,7 +16,7 @@ namespace ReadLine.Controllers
         public IActionResult OpenBookPage()
         {
             long id = long.Parse(HttpContext.Request.Query["itemid"]);
-            return RedirectPermanent($"/api/books/{id}");
+            return Redirect($"/BookInfo/Index/{id}");
         }
     }
 }

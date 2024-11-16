@@ -1,0 +1,38 @@
+﻿@model Book
+<div>
+    <table>
+        <tr>
+            <th>Название:</th>
+            <td>@Model.Title</td>
+        </tr>
+        <tr>
+            <th>Автор:</th>
+            <td>@Model.Author.Surname @Model.Author.Name</td>
+        </tr>
+        <tr>
+            <th>Категория:</th>
+            <td>@Model.Category.Name</td>
+        </tr>
+        <tr>
+            <th>Количество страниц:</th>
+            <td>@Model.PagesCount</td>
+        </tr>
+        <tr>
+            <th>Возрастное ограничение:</th>
+            <td>@Model.AgeLimit.ToString()</td>
+        </tr>
+        <tr>
+            <th>Год публикации:</th>
+            <td>@Model.PublicationYear</td>
+        </tr>
+        <tr>
+            <th>Теги:</th>
+            <td>
+                @foreach(var t in @Model.Tags)
+                {
+                    <span>@t.Name</span>
+                }
+            </td>
+        </tr>
+    </table>
+</div>
