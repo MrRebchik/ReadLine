@@ -1,0 +1,57 @@
+﻿@page
+@model ProfileModel
+
+@if (User.Identity.IsAuthenticated)
+{
+   <div>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">@Model.IdentityUser.UserName</li>
+        <li class="list-group-item">@Model.Profile.ProfileQuote</li>
+        <li class="list-group-item">@Model.Profile.ReadBooks.Count()</li>
+    </ul>
+</div>
+<div>
+    @foreach (var b in @Model.Profile.ReadBooks)
+    {
+        <div class="card" style="width: 12rem; margin-inline: 30px 0px;">
+            <img src="/img/default_cover.png" class="card-img-top rounded-2" alt="Обложка отсутствует" style="margin-top: 10px;">
+            <div class="card-body">
+                <a asp-action="OpenBookPage" asp-route-itemid="@b.BookId" class="d-inline-block text-truncate" style="max-width: 150px;">@b.Title </a>
+                <p class="card-text">@(b.Author.Surname + " " + b.Author.Name)</p>
+                <p class="card-text">@b.PagesCount стр.</p>
+            </div>
+        </div>
+    }
+</div>
+<div>
+
+    </div>
+} else
+{
+    <div class="text-center" style="padding: 50px;">
+        <span>Вы не авторизованы</span>
+        <a class="btn btn-secondary" href="/Login">Авторизоваться</a>
+    </div>
+}
+
+@functions{
+    public class ProfileModel : PageModel{
+        public UserManager<IdentityUser> UserManager;
+        public ProfileContext ProfileContext;
+        public ProfileModel(UserManager<IdentityUser> userManager, ProfileContext profileContext)
+        {
+            UserManager = userManager;
+            ProfileContext = profileContext;
+        }
+        public IdentityUser IdentityUser { get; set; }
+        public UserProfile Profile { get; set; }
+        public async Task OnGetAsync()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                IdentityUser = await UserManager.FindByNameAsync(User.Identity.Name);
+                Profile = await ProfileContext.UserProfiles.FindAsync(IdentityUser.Id);
+            }
+        }
+    }
+}
