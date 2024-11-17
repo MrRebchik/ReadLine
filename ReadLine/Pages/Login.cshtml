@@ -2,16 +2,16 @@
 @model LoginModel
 
 <h4 class="text-center p-2"> Вход</h4>
+<div class="m-1 text-danger" asp-validation-summary="All"></div>
 <form method="post">
-    <div asp-validation-asp-validation-summary="All" class="text-danger"></div>
-    <input type="hidden" name="returnUrl" value="@Model.ReturnUrl"/>
+    <input type="hidden" name="returnUrl" value="@Model.ReturnUrl" />
     <div class="form-group" style="margin-bottom: 40px;">
         <label>Ваше имя</label>
         <input name="UserName" class="form-control" value="@Model.UserName" />
     </div>
     <div class="form-group" style="margin-bottom: 40px;">
         <label>Пароль</label>
-        <input name="Password" class="form-control" value="@Model.Password" />
+        <input name="Password" type="password" class="form-control" value="@Model.Password" />
     </div>
     <button type="submit" class="btn btn-primary">Войти</button>
     <a class="btn btn-secondary" href="/Register">Зарегистрироваться</a>
@@ -31,14 +31,15 @@
         [BindProperty][Required]        
         public string Password { get; set; }
         [BindProperty(SupportsGet = true)]
-        public string ReturnUrl { get; set; }
+        public string ReturnUrl { get; set; } = "/Profile";
         public async Task<IActionResult> OnPostAcync()
         {
+            return Redirect("/Profile");
             if (ModelState.IsValid)
             {
                 Microsoft.AspNetCore.Identity.SignInResult result = await SignInManager.PasswordSignInAsync(UserName, Password, false, false);
                 if (result.Succeeded)
-                    return Redirect(ReturnUrl ?? "/");
+                    
                 ModelState.AddModelError("", "Неверное имя пользователя или пароль");
             }
             return Page();

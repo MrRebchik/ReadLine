@@ -1,7 +1,9 @@
 using ReadLine.Models;
-using Microsoft.EntityFrameworkCore;using ReadLine.Models.People;
+using Microsoft.EntityFrameworkCore;
+using ReadLine.Models.People;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace ReadLine
 {
@@ -19,6 +21,20 @@ namespace ReadLine
             builder.Services.AddDbContext<ProfileContext>(options => { options.UseSqlServer(builder.Configuration.GetConnectionString("ProfileConnection")); options.EnableSensitiveDataLogging(true); });
             builder.Services.AddDbContext<IdentityContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("IdentityConnection")));
             builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<IdentityContext>();
+
+            builder.Services.Configure<IdentityOptions>(opts =>
+            {
+                opts.Password.RequiredLength = 6;
+                opts.Password.RequireNonAlphanumeric = false;
+                opts.Password.RequireLowercase = false;
+                opts.Password.RequireUppercase = false;
+                opts.Password.RequireDigit = false;
+                opts.User.RequireUniqueEmail = true;
+            });
+            builder.Services.Configure<CookieAuthenticationOptions>(IdentityConstants.ApplicationScheme, opts =>
+            {
+                opts.LoginPath = "/Login";
+            });
 
             builder.Services.AddControllers();
             builder.Services.AddSwaggerGen(options =>
