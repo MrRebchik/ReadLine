@@ -43,7 +43,8 @@ namespace ReadLine.Controllers
             IEnumerable<Book> books = await context.Books.Include(b => b.Author).ToListAsync();
             IEnumerable<Book> result = books.
                 Where(b => 
-                TempData["search-string"].ToString().ToLower().Split(' ', StringSplitOptions.RemoveEmptyEntries).Intersect(b.Title.ToLower().Split(' ', StringSplitOptions.RemoveEmptyEntries)).Count()>0).
+                TempData["search-string"].ToString().ToLower().Split(' ', StringSplitOptions.RemoveEmptyEntries).
+                Intersect(b.Title.ToLower().Split(' ', StringSplitOptions.RemoveEmptyEntries)).Count()>0).
                 ToList();
             return View("Index", result);
         }

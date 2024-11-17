@@ -1,4 +1,8 @@
 ﻿@page
-@model ReadLine.Pages.LoginModel
-@{
+@model LoginModel
+@functions {
+    public class LoginModel : PageModel
+    {
+        public UserManager<IdentityUser> UserManager;
+    }
 }
