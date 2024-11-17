@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using ReadLine.Models;
 using System.Linq;
-using System.Text.RegularExpressions;
 
 namespace ReadLine.Controllers
 {
@@ -47,30 +46,6 @@ namespace ReadLine.Controllers
                 TempData["search-string"].ToString().ToLower().Split(' ', StringSplitOptions.RemoveEmptyEntries).Intersect(b.Title.ToLower().Split(' ', StringSplitOptions.RemoveEmptyEntries)).Count()>0).
                 ToList();
             return View("Index", result);
-        }
-        //private List<Book> AssertFilter(Book b, string filter)
-        //{
-        //    string[] inputs = filter.Split([' ', ',', '.']);
-        //    int matchCount = 0;
-        //    foreach (var item in inputs)
-        //    {
-        //        Regex regex = new Regex(item.Substring(0,item.Length-2) + "(\\w*)", RegexOptions.IgnoreCase); //TODO если строка длиной 1
-        //        MatchCollection titleMatches = regex.Matches(b.Title);
-        //        MatchCollection authorMatches = regex.Matches(b.Author.Name);
-        //        matchCount += titleMatches.Count;
-        //        matchCount += authorMatches.Count;
-        //    }
-        //    return matchCount > 0;
-        //}
-        public List<Book> SearchProducts(string pattern)
-        {
-            // Компиляция регулярного выражения
-            Regex regex = new Regex(pattern, RegexOptions.IgnoreCase);
-
-            // Фильтрация товаров по совпадению с регулярным выражением
-            var filteredProducts = context.Books.Where(p => regex.IsMatch(p.Title)).ToList();
-
-            return filteredProducts;
         }
     }
 }
