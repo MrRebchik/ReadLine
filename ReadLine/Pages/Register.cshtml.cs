@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace ReadLine.Pages
 {
-    public class IndexModel : PageModel
+    public class RegisterModel : PageModel
     {
         public void OnGet()
         {
