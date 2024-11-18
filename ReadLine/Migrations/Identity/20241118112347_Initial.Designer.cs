@@ -12,7 +12,7 @@ using ReadLine.Models.People;
 namespace ReadLine.Migrations.Identity
 {
     [DbContext(typeof(IdentityContext))]
-    [Migration("20241114092809_Initial")]
+    [Migration("20241118112347_Initial")]
     partial class Initial
     {
         /// <inheritdoc />

@@ -5,14 +5,14 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using ReadLine.Models;
+using ReadLine.Models.People;
 
 #nullable disable
 
-namespace ReadLine.Migrations
+namespace ReadLine.Migrations.Profile
 {
-    [DbContext(typeof(MainDataContext))]
-    [Migration("20241107190147_Initial")]
+    [DbContext(typeof(ProfileContext))]
+    [Migration("20241118112405_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -113,7 +113,7 @@ namespace ReadLine.Migrations
 
                     b.HasKey("AuthorId");
 
-                    b.ToTable("Authors");
+                    b.ToTable("Author");
                 });
 
             modelBuilder.Entity("ReadLine.Models.Book", b =>
@@ -150,14 +150,14 @@ namespace ReadLine.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long?>("UserProfileId")
-                        .HasColumnType("bigint");
+                    b.Property<string>("UserProfileIdentityUserId")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<long?>("UserProfileId1")
-                        .HasColumnType("bigint");
+                    b.Property<string>("UserProfileIdentityUserId1")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<long?>("UserProfileId2")
-                        .HasColumnType("bigint");
+                    b.Property<string>("UserProfileIdentityUserId2")
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("BookId");
 
@@ -165,13 +165,13 @@ namespace ReadLine.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.HasIndex("UserProfileId");
+                    b.HasIndex("UserProfileIdentityUserId");
 
-                    b.HasIndex("UserProfileId1");
+                    b.HasIndex("UserProfileIdentityUserId1");
 
-                    b.HasIndex("UserProfileId2");
+                    b.HasIndex("UserProfileIdentityUserId2");
 
-                    b.ToTable("Books");
+                    b.ToTable("Book");
                 });
 
             modelBuilder.Entity("ReadLine.Models.Category", b =>
@@ -188,35 +188,31 @@ namespace ReadLine.Migrations
 
                     b.HasKey("CategoryId");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Category");
                 });
 
             modelBuilder.Entity("ReadLine.Models.People.UserProfile", b =>
                 {
-                    b.Property<long>("UserProfileId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("UserProfileId"));
-
-                    b.Property<long>("IdentityUserId")
-                        .HasColumnType("bigint");
+                    b.Property<string>("IdentityUserId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("IdentityUserId1")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProfileQuote")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long?>("UserProfileId1")
+                    b.Property<long>("UserProfileId")
                         .HasColumnType("bigint");
 
-                    b.HasKey("UserProfileId");
+                    b.Property<string>("UserProfileIdentityUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("IdentityUserId");
 
                     b.HasIndex("IdentityUserId1");
 
-                    b.HasIndex("UserProfileId1");
+                    b.HasIndex("UserProfileIdentityUserId");
 
                     b.ToTable("UserProfiles");
                 });
@@ -235,7 +231,7 @@ namespace ReadLine.Migrations
 
                     b.HasKey("TagId");
 
-                    b.ToTable("Tags");
+                    b.ToTable("Tag");
                 });
 
             modelBuilder.Entity("BookTag", b =>
@@ -269,15 +265,15 @@ namespace ReadLine.Migrations
 
                     b.HasOne("ReadLine.Models.People.UserProfile", null)
                         .WithMany("FavoriteBooks")
-                        .HasForeignKey("UserProfileId");
+                        .HasForeignKey("UserProfileIdentityUserId");
 
                     b.HasOne("ReadLine.Models.People.UserProfile", null)
                         .WithMany("ReadBooks")
-                        .HasForeignKey("UserProfileId1");
+                        .HasForeignKey("UserProfileIdentityUserId1");
 
                     b.HasOne("ReadLine.Models.People.UserProfile", null)
                         .WithMany("WishBooks")
-                        .HasForeignKey("UserProfileId2");
+                        .HasForeignKey("UserProfileIdentityUserId2");
 
                     b.Navigation("Author");
 
@@ -292,7 +288,7 @@ namespace ReadLine.Migrations
 
                     b.HasOne("ReadLine.Models.People.UserProfile", null)
                         .WithMany("Friends")
-                        .HasForeignKey("UserProfileId1");
+                        .HasForeignKey("UserProfileIdentityUserId");
 
                     b.Navigation("IdentityUser");
                 });

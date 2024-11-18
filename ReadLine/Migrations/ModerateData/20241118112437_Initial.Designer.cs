@@ -11,7 +11,7 @@ using ReadLine.Models.People;
 namespace ReadLine.Migrations.ModerateData
 {
     [DbContext(typeof(ModerateDataContext))]
-    [Migration("20241114093008_Initial")]
+    [Migration("20241118112437_Initial")]
     partial class Initial
     {
         /// <inheritdoc />

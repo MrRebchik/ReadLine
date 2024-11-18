@@ -23,9 +23,11 @@
 @functions{
     public class RegisterModel : PageModel{
         public UserManager<IdentityUser> UserManager;
-        public RegisterModel(UserManager<IdentityUser> usrManager)
+        public ProfileContext ProfileContext;
+        public RegisterModel(UserManager<IdentityUser> usrManager, ProfileContext profileContext)
         {
             UserManager = usrManager;
+            ProfileContext = profileContext;
         }
         [BindProperty][Required]
         public string UserName { get; set; }
@@ -41,6 +43,9 @@
                 IdentityResult result = await UserManager.CreateAsync(user, Password);
                 if (result.Succeeded)
                 {
+                    UserProfile profile = new UserProfile() { IdentityUser = user };
+                    ProfileContext.Add(profile);
+                    ProfileContext.SaveChanges();
                     return RedirectToPage("Profile");
                 }
                 else

@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -40,31 +39,6 @@ namespace ReadLine.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "IdentityUser",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    UserName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    NormalizedUserName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    NormalizedEmail = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
-                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SecurityStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumberConfirmed = table.Column<bool>(type: "bit", nullable: false),
-                    TwoFactorEnabled = table.Column<bool>(type: "bit", nullable: false),
-                    LockoutEnd = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
-                    LockoutEnabled = table.Column<bool>(type: "bit", nullable: false),
-                    AccessFailedCount = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_IdentityUser", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Tags",
                 columns: table => new
                 {
@@ -75,32 +49,6 @@ namespace ReadLine.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Tags", x => x.TagId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "UserProfiles",
-                columns: table => new
-                {
-                    UserProfileId = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    IdentityUserId = table.Column<long>(type: "bigint", nullable: false),
-                    IdentityUserId1 = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    ProfileQuote = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UserProfileId1 = table.Column<long>(type: "bigint", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_UserProfiles", x => x.UserProfileId);
-                    table.ForeignKey(
-                        name: "FK_UserProfiles_IdentityUser_IdentityUserId1",
-                        column: x => x.IdentityUserId1,
-                        principalTable: "IdentityUser",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_UserProfiles_UserProfiles_UserProfileId1",
-                        column: x => x.UserProfileId1,
-                        principalTable: "UserProfiles",
-                        principalColumn: "UserProfileId");
                 });
 
             migrationBuilder.CreateTable(
@@ -116,10 +64,7 @@ namespace ReadLine.Migrations
                     PagesCount = table.Column<int>(type: "int", nullable: false),
                     PublishFormat = table.Column<int>(type: "int", nullable: false),
                     CategoryId = table.Column<long>(type: "bigint", nullable: false),
-                    AgeLimit = table.Column<int>(type: "int", nullable: false),
-                    UserProfileId = table.Column<long>(type: "bigint", nullable: true),
-                    UserProfileId1 = table.Column<long>(type: "bigint", nullable: true),
-                    UserProfileId2 = table.Column<long>(type: "bigint", nullable: true)
+                    AgeLimit = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -136,21 +81,6 @@ namespace ReadLine.Migrations
                         principalTable: "Categories",
                         principalColumn: "CategoryId",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Books_UserProfiles_UserProfileId",
-                        column: x => x.UserProfileId,
-                        principalTable: "UserProfiles",
-                        principalColumn: "UserProfileId");
-                    table.ForeignKey(
-                        name: "FK_Books_UserProfiles_UserProfileId1",
-                        column: x => x.UserProfileId1,
-                        principalTable: "UserProfiles",
-                        principalColumn: "UserProfileId");
-                    table.ForeignKey(
-                        name: "FK_Books_UserProfiles_UserProfileId2",
-                        column: x => x.UserProfileId2,
-                        principalTable: "UserProfiles",
-                        principalColumn: "UserProfileId");
                 });
 
             migrationBuilder.CreateTable(
@@ -188,34 +118,9 @@ namespace ReadLine.Migrations
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Books_UserProfileId",
-                table: "Books",
-                column: "UserProfileId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Books_UserProfileId1",
-                table: "Books",
-                column: "UserProfileId1");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Books_UserProfileId2",
-                table: "Books",
-                column: "UserProfileId2");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_BookTag_TagsTagId",
                 table: "BookTag",
                 column: "TagsTagId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_UserProfiles_IdentityUserId1",
-                table: "UserProfiles",
-                column: "IdentityUserId1");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_UserProfiles_UserProfileId1",
-                table: "UserProfiles",
-                column: "UserProfileId1");
         }
 
         /// <inheritdoc />
@@ -235,12 +140,6 @@ namespace ReadLine.Migrations
 
             migrationBuilder.DropTable(
                 name: "Categories");
-
-            migrationBuilder.DropTable(
-                name: "UserProfiles");
-
-            migrationBuilder.DropTable(
-                name: "IdentityUser");
         }
     }
 }

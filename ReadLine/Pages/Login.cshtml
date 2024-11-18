@@ -32,14 +32,13 @@
         public string Password { get; set; }
         [BindProperty(SupportsGet = true)]
         public string ReturnUrl { get; set; } = "/Profile";
-        public async Task<IActionResult> OnPostAcync()
+        public async Task<IActionResult> OnPostAsync()
         {
-            return Redirect("/Profile");
             if (ModelState.IsValid)
             {
                 Microsoft.AspNetCore.Identity.SignInResult result = await SignInManager.PasswordSignInAsync(UserName, Password, false, false);
                 if (result.Succeeded)
-                    
+                    return Redirect(ReturnUrl ?? "/");
                 ModelState.AddModelError("", "Неверное имя пользователя или пароль");
             }
             return Page();
