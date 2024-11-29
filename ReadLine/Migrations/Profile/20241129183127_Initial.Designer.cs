@@ -12,7 +12,7 @@ using ReadLine.Models.People;
 namespace ReadLine.Migrations.Profile
 {
     [DbContext(typeof(ProfileContext))]
-    [Migration("20241118112405_Initial")]
+    [Migration("20241129183127_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -150,13 +150,13 @@ namespace ReadLine.Migrations.Profile
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserProfileIdentityUserId")
+                    b.Property<string>("UserProfileIdentityUserName")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("UserProfileIdentityUserId1")
+                    b.Property<string>("UserProfileIdentityUserName1")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("UserProfileIdentityUserId2")
+                    b.Property<string>("UserProfileIdentityUserName2")
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("BookId");
@@ -165,11 +165,11 @@ namespace ReadLine.Migrations.Profile
 
                     b.HasIndex("CategoryId");
 
-                    b.HasIndex("UserProfileIdentityUserId");
+                    b.HasIndex("UserProfileIdentityUserName");
 
-                    b.HasIndex("UserProfileIdentityUserId1");
+                    b.HasIndex("UserProfileIdentityUserName1");
 
-                    b.HasIndex("UserProfileIdentityUserId2");
+                    b.HasIndex("UserProfileIdentityUserName2");
 
                     b.ToTable("Book");
                 });
@@ -193,26 +193,23 @@ namespace ReadLine.Migrations.Profile
 
             modelBuilder.Entity("ReadLine.Models.People.UserProfile", b =>
                 {
-                    b.Property<string>("IdentityUserId")
+                    b.Property<string>("IdentityUserName")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("IdentityUserId1")
+                    b.Property<string>("IdentityUserId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProfileQuote")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long>("UserProfileId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("UserProfileIdentityUserId")
+                    b.Property<string>("UserProfileIdentityUserName")
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("IdentityUserId");
+                    b.HasKey("IdentityUserName");
 
-                    b.HasIndex("IdentityUserId1");
+                    b.HasIndex("IdentityUserId");
 
-                    b.HasIndex("UserProfileIdentityUserId");
+                    b.HasIndex("UserProfileIdentityUserName");
 
                     b.ToTable("UserProfiles");
                 });
@@ -265,15 +262,15 @@ namespace ReadLine.Migrations.Profile
 
                     b.HasOne("ReadLine.Models.People.UserProfile", null)
                         .WithMany("FavoriteBooks")
-                        .HasForeignKey("UserProfileIdentityUserId");
+                        .HasForeignKey("UserProfileIdentityUserName");
 
                     b.HasOne("ReadLine.Models.People.UserProfile", null)
                         .WithMany("ReadBooks")
-                        .HasForeignKey("UserProfileIdentityUserId1");
+                        .HasForeignKey("UserProfileIdentityUserName1");
 
                     b.HasOne("ReadLine.Models.People.UserProfile", null)
                         .WithMany("WishBooks")
-                        .HasForeignKey("UserProfileIdentityUserId2");
+                        .HasForeignKey("UserProfileIdentityUserName2");
 
                     b.Navigation("Author");
 
@@ -284,11 +281,11 @@ namespace ReadLine.Migrations.Profile
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "IdentityUser")
                         .WithMany()
-                        .HasForeignKey("IdentityUserId1");
+                        .HasForeignKey("IdentityUserId");
 
                     b.HasOne("ReadLine.Models.People.UserProfile", null)
                         .WithMany("Friends")
-                        .HasForeignKey("UserProfileIdentityUserId");
+                        .HasForeignKey("UserProfileIdentityUserName");
 
                     b.Navigation("IdentityUser");
                 });

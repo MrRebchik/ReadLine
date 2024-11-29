@@ -6,9 +6,9 @@ namespace ReadLine.Models.People
 {
     public class UserProfile
     {
-        public long UserProfileId { get; set; }
+        //public long UserProfileId { get; set; }
         [Key]
-        public string IdentityUserId { get; set; }
+        public string IdentityUserName { get; set; }
         public IdentityUser IdentityUser { get; set; }
         public string? ProfileQuote { get; set; }
         public List<Book> ReadBooks { get; set; } = [];

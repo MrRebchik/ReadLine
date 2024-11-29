@@ -5,10 +5,9 @@ using System.Linq;
 
 namespace ReadLine.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BookControllerBase
     {
-        private MainDataContext context;
-        public HomeController(MainDataContext context) { this.context = context; }
+        public HomeController(MainDataContext context): base(context) { }
         public async Task<IActionResult> Index(IEnumerable<Book> booksSearch = null)
         {
             IEnumerable<Book> books;

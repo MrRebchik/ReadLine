@@ -43,7 +43,7 @@
                 IdentityResult result = await UserManager.CreateAsync(user, Password);
                 if (result.Succeeded)
                 {
-                    UserProfile profile = new UserProfile() { IdentityUser = user };
+                    UserProfile profile = new UserProfile() { IdentityUser = user, IdentityUserName = user.UserName };
                     ProfileContext.Add(profile);
                     ProfileContext.SaveChanges();
                     return RedirectToPage("Profile");

@@ -4,10 +4,9 @@ using ReadLine.Models;
 
 namespace ReadLine.Controllers
 {
-    public class BookInfoController : Controller
+    public class BookInfoController : BookControllerBase
     {
-        private MainDataContext context;
-        public BookInfoController(MainDataContext context) { this.context = context; }
+        public BookInfoController(MainDataContext context) : base(context){ }
         public async Task<IActionResult> Index(long id)
         {
             var book = context.Books.Include(b => b.Author).Include(b => b.Tags).Include(b => b.Category).First(b => b.BookId == id);

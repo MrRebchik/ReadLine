@@ -81,25 +81,24 @@ namespace ReadLine.Migrations.Profile
                 name: "UserProfiles",
                 columns: table => new
                 {
-                    IdentityUserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    UserProfileId = table.Column<long>(type: "bigint", nullable: false),
-                    IdentityUserId1 = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    IdentityUserName = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    IdentityUserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     ProfileQuote = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UserProfileIdentityUserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    UserProfileIdentityUserName = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserProfiles", x => x.IdentityUserId);
+                    table.PrimaryKey("PK_UserProfiles", x => x.IdentityUserName);
                     table.ForeignKey(
-                        name: "FK_UserProfiles_IdentityUser_IdentityUserId1",
-                        column: x => x.IdentityUserId1,
+                        name: "FK_UserProfiles_IdentityUser_IdentityUserId",
+                        column: x => x.IdentityUserId,
                         principalTable: "IdentityUser",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_UserProfiles_UserProfiles_UserProfileIdentityUserId",
-                        column: x => x.UserProfileIdentityUserId,
+                        name: "FK_UserProfiles_UserProfiles_UserProfileIdentityUserName",
+                        column: x => x.UserProfileIdentityUserName,
                         principalTable: "UserProfiles",
-                        principalColumn: "IdentityUserId");
+                        principalColumn: "IdentityUserName");
                 });
 
             migrationBuilder.CreateTable(
@@ -116,9 +115,9 @@ namespace ReadLine.Migrations.Profile
                     PublishFormat = table.Column<int>(type: "int", nullable: false),
                     CategoryId = table.Column<long>(type: "bigint", nullable: false),
                     AgeLimit = table.Column<int>(type: "int", nullable: false),
-                    UserProfileIdentityUserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    UserProfileIdentityUserId1 = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    UserProfileIdentityUserId2 = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    UserProfileIdentityUserName = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    UserProfileIdentityUserName1 = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    UserProfileIdentityUserName2 = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -136,20 +135,20 @@ namespace ReadLine.Migrations.Profile
                         principalColumn: "CategoryId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Book_UserProfiles_UserProfileIdentityUserId",
-                        column: x => x.UserProfileIdentityUserId,
+                        name: "FK_Book_UserProfiles_UserProfileIdentityUserName",
+                        column: x => x.UserProfileIdentityUserName,
                         principalTable: "UserProfiles",
-                        principalColumn: "IdentityUserId");
+                        principalColumn: "IdentityUserName");
                     table.ForeignKey(
-                        name: "FK_Book_UserProfiles_UserProfileIdentityUserId1",
-                        column: x => x.UserProfileIdentityUserId1,
+                        name: "FK_Book_UserProfiles_UserProfileIdentityUserName1",
+                        column: x => x.UserProfileIdentityUserName1,
                         principalTable: "UserProfiles",
-                        principalColumn: "IdentityUserId");
+                        principalColumn: "IdentityUserName");
                     table.ForeignKey(
-                        name: "FK_Book_UserProfiles_UserProfileIdentityUserId2",
-                        column: x => x.UserProfileIdentityUserId2,
+                        name: "FK_Book_UserProfiles_UserProfileIdentityUserName2",
+                        column: x => x.UserProfileIdentityUserName2,
                         principalTable: "UserProfiles",
-                        principalColumn: "IdentityUserId");
+                        principalColumn: "IdentityUserName");
                 });
 
             migrationBuilder.CreateTable(
@@ -187,19 +186,19 @@ namespace ReadLine.Migrations.Profile
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Book_UserProfileIdentityUserId",
+                name: "IX_Book_UserProfileIdentityUserName",
                 table: "Book",
-                column: "UserProfileIdentityUserId");
+                column: "UserProfileIdentityUserName");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Book_UserProfileIdentityUserId1",
+                name: "IX_Book_UserProfileIdentityUserName1",
                 table: "Book",
-                column: "UserProfileIdentityUserId1");
+                column: "UserProfileIdentityUserName1");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Book_UserProfileIdentityUserId2",
+                name: "IX_Book_UserProfileIdentityUserName2",
                 table: "Book",
-                column: "UserProfileIdentityUserId2");
+                column: "UserProfileIdentityUserName2");
 
             migrationBuilder.CreateIndex(
                 name: "IX_BookTag_TagsTagId",
@@ -207,14 +206,14 @@ namespace ReadLine.Migrations.Profile
                 column: "TagsTagId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserProfiles_IdentityUserId1",
+                name: "IX_UserProfiles_IdentityUserId",
                 table: "UserProfiles",
-                column: "IdentityUserId1");
+                column: "IdentityUserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserProfiles_UserProfileIdentityUserId",
+                name: "IX_UserProfiles_UserProfileIdentityUserName",
                 table: "UserProfiles",
-                column: "UserProfileIdentityUserId");
+                column: "UserProfileIdentityUserName");
         }
 
         /// <inheritdoc />

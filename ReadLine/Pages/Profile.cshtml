@@ -50,7 +50,7 @@
             if (User.Identity.IsAuthenticated)
             {
                 IdentityUser = await UserManager.FindByNameAsync(User.Identity.Name);
-                Profile = await ProfileContext.UserProfiles.FindAsync(long.Parse(IdentityUser.Id));
+                Profile = await ProfileContext.UserProfiles.FindAsync(User.Identity.Name);
             }
         }
     }
