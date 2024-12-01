@@ -21,14 +21,10 @@
 </form>
 
 @functions{
-    public class RegisterModel : PageModel{
-        public UserManager<IdentityUser> UserManager;
-        public ProfileContext ProfileContext;
-        public RegisterModel(UserManager<IdentityUser> usrManager, ProfileContext profileContext)
-        {
-            UserManager = usrManager;
-            ProfileContext = profileContext;
-        }
+    public class RegisterModel : PageModelBase{
+
+        public RegisterModel(UserManager<IdentityUser> usrManager, ProfileContext profileContext) : base(usrManager, profileContext) { }
+
         [BindProperty][Required]
         public string UserName { get; set; }
         [BindProperty][Required][EmailAddress]

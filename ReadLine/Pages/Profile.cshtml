@@ -35,14 +35,10 @@
 }
 
 @functions{
-    public class ProfileModel : PageModel{
-        public UserManager<IdentityUser> UserManager;
-        public ProfileContext ProfileContext;
-        public ProfileModel(UserManager<IdentityUser> userManager, ProfileContext profileContext)
-        {
-            UserManager = userManager;
-            ProfileContext = profileContext;
-        }
+    public class ProfileModel : PageModelBase{
+
+        public ProfileModel(UserManager<IdentityUser> usrManager, ProfileContext profileContext) : base(usrManager, profileContext) { }
+
         public IdentityUser IdentityUser { get; set; }
         public UserProfile Profile { get; set; }
         public async Task OnGetAsync()
