@@ -16,7 +16,7 @@
         <div class="card" style="width: 12rem; margin-inline: 30px 0px;">
             <img src="/img/default_cover.png" class="card-img-top rounded-2" alt="Обложка отсутствует" style="margin-top: 10px;">
             <div class="card-body">
-                <a asp-action="OpenBookPage" asp-route-itemid="@b.BookId" class="d-inline-block text-truncate" style="max-width: 150px;">@b.Title </a>
+                <a href="@Url.Action("OpenBookPage",b.BookId)" class="d-inline-block text-truncate" style="max-width: 150px;">@b.Title </a>
                 <p class="card-text">@(b.Author.Surname + " " + b.Author.Name)</p>
                 <p class="card-text">@b.PagesCount стр.</p>
             </div>
@@ -30,7 +30,7 @@
 {
     <div class="text-center" style="padding: 50px;">
         <span>Вы не авторизованы</span>
-        <a class="btn btn-secondary" href="/Login">Авторизоваться</a>
+        <a class="btn btn-secondary" href="@Url.Action("","Login")">Авторизоваться</a>
     </div>
 }
 

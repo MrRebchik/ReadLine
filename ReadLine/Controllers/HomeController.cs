@@ -21,11 +21,6 @@ namespace ReadLine.Controllers
             }
             return View(context.Books.ToList());
         }
-        public IActionResult OpenBookPage()
-        {
-            long id = long.Parse(HttpContext.Request.Query["itemid"]);
-            return Redirect($"/BookInfo/Index/{id}");
-        }
 
         [HttpPost]
         public IActionResult SearchForm()
