@@ -14,8 +14,8 @@
         <input name="Password" type="password" class="form-control" value="@Model.Password" />
     </div>
     <button type="submit" class="btn btn-primary">Войти</button>
-    <a class="btn btn-secondary" href="/Register">Зарегистрироваться</a>
-    <a class="btn btn-secondary" href="/Home/Index">На главную</a>
+    <a class="btn btn-secondary" href="@Url.Action("","Register")/">Зарегистрироваться</a>
+    <a class="btn btn-secondary" href="@Url.Action("Index","Home")">На главную</a>
 </form>
 
 @functions {
