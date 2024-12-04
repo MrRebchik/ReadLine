@@ -22,21 +22,20 @@
             <p>Ничего не найдено.</p>
             <a class="btn btn-secondary" href="@Url.Action("Index")">На главную</a>
         }
-        @for(int i = 0; i < (Model.Count()/4)+1; i++)
-        {
-            <div class="row">
-            @foreach(var b in Model.Skip(i).Take(4))
+        <div class="container" style="display: flex; flex-wrap: wrap; justify-content: space-around; align-items: center; padding: 2.5rem 5%; ">
+            @foreach (var b in Model.Take(30))
             {
-                <div class="card" style="width: 12rem; margin-inline: 30px 0px;">
-                    <img src="/img/default_cover.png" class="card-img-top rounded-2" alt="Обложка отсутствует" style="margin-top: 10px;">
-                    <div class="card-body">
-                        <a href="@Url.Action("Index", "BookInfo", new{ id = b.BookId })" class="d-inline-block text-truncate" style="max-width: 150px;">@b.Title </a>
-                        <p class="card-text">@(b.Author.Surname + " " + b.Author.Name)</p>
-                        <p class="card-text">@b.PagesCount стр.</p>
+                <div class="box" style="flex: 0 0 12rem; position: relative; margin: 1rem; min-width: 120px">
+                    <div class="card" >
+                        <img src="/img/default_cover.png" class="card-img-top rounded-2" alt="Обложка отсутствует" style="max-width: 92%; margin: 10px;">
+                        <div class="card-body">
+                            <a href="@Url.Action("Index", "BookInfo", new{ id = b.BookId })" class="d-inline-block text-truncate" style="max-width: 150px;">@b.Title </a>
+                            <p class="card-text">@(b.Author.Surname + " " + b.Author.Name)</p>
+                            <p class="card-text">@b.PagesCount стр.</p>
+                        </div>
                     </div>
                 </div>
             }
-            </div>
-        }
+        </div>
     </div>
 </div>
