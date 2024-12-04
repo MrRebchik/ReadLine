@@ -23,22 +23,13 @@ namespace ReadLine.Controllers
         }
 
         [HttpPost]
-        public IActionResult SearchForm()
+        public async Task<IActionResult> SearchForm(string search)
         {
-            foreach (string key in Request.Form.Keys.Where(k => !k.StartsWith("_")))
-            {
-                TempData[key] = string.Join(", ", Request.Form[key]);
-            }
-            return RedirectToAction(nameof(Results));
-        }
-        public async Task<IActionResult> Results()
-        {
-
             IEnumerable<Book> books = await context.Books.Include(b => b.Author).ToListAsync();
             IEnumerable<Book> result = books.
-                Where(b => 
-                TempData["search-string"].ToString().ToLower().Split(' ', StringSplitOptions.RemoveEmptyEntries).
-                Intersect(b.Title.ToLower().Split(' ', StringSplitOptions.RemoveEmptyEntries)).Count()>0).
+                Where(b =>
+                search.ToString().ToLower().Split(' ', StringSplitOptions.RemoveEmptyEntries).
+                Intersect(b.Title.ToLower().Split(' ', StringSplitOptions.RemoveEmptyEntries)).Count() > 0).
                 ToList();
             return View("Index", result);
         }
