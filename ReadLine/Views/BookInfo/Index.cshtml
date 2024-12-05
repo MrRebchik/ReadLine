@@ -1,4 +1,4 @@
-﻿@model Book
+﻿@model BookViewModel
 <div>
     <table>
         <tr>
@@ -7,11 +7,11 @@
         </tr>
         <tr>
             <th>Автор:</th>
-            <td>@Model.Author.Surname @Model.Author.Name</td>
+            <td>@Model.AuthorSurname @Model.AuthorName</td>
         </tr>
         <tr>
             <th>Категория:</th>
-            <td>@Model.Category.Name</td>
+            <td>@Model.Category</td>
         </tr>
         <tr>
             <th>Количество страниц:</th>
@@ -30,7 +30,7 @@
             <td>
                 @foreach(var t in @Model.Tags)
                 {
-                    <span class="badge bg-secondary">@t.Name</span>
+                    <span class="badge bg-secondary">@t</span>
                 }
             </td>
         </tr>
