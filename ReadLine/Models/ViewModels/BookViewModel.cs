@@ -1,4 +1,6 @@
-﻿namespace ReadLine.Models.ViewModels
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace ReadLine.Models.ViewModels
 {
     public class BookViewModel
     {
@@ -11,5 +13,17 @@
         public int PublicationYear { get; set; }
         public List<string> Tags { get; set; }
         public int PagesCount { get; set; }
+        public BookViewModel(Book book)
+        {
+            BookId = book.BookId;
+            Title = book.Title;
+            AuthorName = book.Author.Name;
+            AuthorSurname = book.Author.Surname;
+            Category = book.Category.Name;
+            AgeLimit = book.AgeLimit.ToString();
+            PublicationYear = book.PublicationYear;
+            Tags = book.Tags.Select(b => b.Name).ToList();
+            PagesCount = book.PagesCount;
+        }
     }
 }
