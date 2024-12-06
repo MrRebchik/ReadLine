@@ -13,9 +13,6 @@ namespace ReadLine
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
-            //builder.Services.AddRazorPages();
-
             builder.Services.AddDbContext<MainDataContext>(options => { options.UseSqlServer(builder.Configuration.GetConnectionString("MainDataConnection")); options.EnableSensitiveDataLogging(true); });
             builder.Services.AddDbContext<ModerateDataContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("ModerateDataConnection")));
             builder.Services.AddDbContext<ProfileContext>(options => { options.UseSqlServer(builder.Configuration.GetConnectionString("ProfileConnection")); options.EnableSensitiveDataLogging(true); });
@@ -30,6 +27,8 @@ namespace ReadLine
                 opts.Password.RequireUppercase = false;
                 opts.Password.RequireDigit = false;
                 opts.User.RequireUniqueEmail = true;
+                opts.User.AllowedUserNameCharacters =
+                "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+/ÀÁÂÃÄÅ¨ÆÇÈÉÊËÌÍÎÏĞÑÒÓÔÕÖ×ØÙÚÛÜİŞßàáâãäå¸æçèéêëìíîïğñòóôõö÷øùúûüış";
             });
             builder.Services.Configure<CookieAuthenticationOptions>(IdentityConstants.ApplicationScheme, opts =>
             {

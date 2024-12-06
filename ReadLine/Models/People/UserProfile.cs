@@ -6,7 +6,6 @@ namespace ReadLine.Models.People
 {
     public class UserProfile
     {
-        //public long UserProfileId { get; set; }
         [Key]
         public string IdentityUserName { get; set; }
         public IdentityUser IdentityUser { get; set; }

@@ -1,0 +1,22 @@
+﻿@page
+@model LogoutModel
+
+<div>
+    <h3>Вы вышли из учетной записи</h3>
+    <a class="btn btn-secondary" href="@Url.Action("","Login")">Авторизоваться</a>
+</div>
+
+@functions{
+    public class LogoutModel : PageModel
+    {
+        private SignInManager<IdentityUser> signInManager;
+        public LogoutModel(SignInManager<IdentityUser> signInMngr)
+        {
+            signInManager = signInMngr;
+        }
+        public async Task OnGetAsync()
+        {
+            await signInManager.SignOutAsync();
+        }
+    }
+}
