@@ -11,8 +11,9 @@ namespace ReadLine.Models.ViewModels
         public List<BookViewModel> ReadBooks;
         public List<BookViewModel> FavoriteBooks;
         public List<BookViewModel> WishBooks;
+        public List<BookViewModel> SearchBooks;
         public bool IsAuthenticated;
-        public string SelectedList;
+        public string IfSearchModalOpen;
 
         public ProfileViewModel()
         {
@@ -27,6 +28,7 @@ namespace ReadLine.Models.ViewModels
             ReadBooks = userProfile.ReadBooks.Select(book => new BookViewModel(book)).ToList();
             FavoriteBooks = userProfile.FavoriteBooks.Select(book => new BookViewModel(book)).ToList();
             WishBooks = userProfile.WishBooks.Select(book => new BookViewModel(book)).ToList();
+            SearchBooks = new List<BookViewModel>();
         }
     }
 }
