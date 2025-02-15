@@ -43,6 +43,7 @@ namespace ReadLine
 
             builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
             builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
+            builder.Services.AddServerSideBlazor();
 
             var app = builder.Build();
 
@@ -61,6 +62,7 @@ namespace ReadLine
             app.MapDefaultControllerRoute();
             app.MapControllers();
             app.MapRazorPages();
+            app.MapBlazorHub();
             app.UseSwagger();
             app.UseSwaggerUI(options =>
             {

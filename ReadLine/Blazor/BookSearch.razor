@@ -1,0 +1,43 @@
+﻿<div class="container-fluid">
+    <form class="d-flex" method="post">
+        <input class="form-control me-2" style="min-width: 300px;" name="search" @bind="SearchString" type="search" placeholder="Поиск" aria-label="Поиск">
+        @* <button class="btn btn-outline-success" type="submit">Поиск</button> *@
+    </form>
+</div>
+@if (SearchBooks().Count > 0)
+{
+    foreach (var b in SearchBooks().Take(30))
+    {
+        <a href="">
+            <div class="box" style="flex: 0 0 3rem; position: relative; margin: 1rem; max-width: 200px;">
+                <div class="card">
+                    <img src="/img/default_cover.png" class="card-img-top rounded-2" alt="Обложка отсутствует" style="max-width: 92%; margin: 10px;">
+                    <div class="card-body" style="max-width: 150px;">
+                        <p class="card-text"> @b.Title </p>
+                        <p class="card-text">@(b.AuthorSurname + " " + b.AuthorName)</p>
+                        <p class="card-text">@b.PagesCount стр.</p>
+                    </div>
+                </div>
+            </div>
+        </a>
+    
+    }
+}
+
+@code {
+    [Inject]
+    public MainDataContext context { get; set; }
+    public string SearchString { get; set; } = "";
+    public List<Book> Books => context.Books.Include(b => b.Author).Include(b => b.Tags).Include(b => b.Category).ToList();
+    public List<BookViewModel> SearchBooks()
+    {
+        
+        List<BookViewModel> result = Books.
+        Where(b =>
+        SearchString.ToString().ToLower().Split(' ', StringSplitOptions.RemoveEmptyEntries).
+        Intersect(b.Title.ToLower().Split(' ', StringSplitOptions.RemoveEmptyEntries)).Count() > 0).
+        Select(book => new BookViewModel(book))
+        .ToList();
+        return result;
+    }
+}
