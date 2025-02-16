@@ -1,0 +1,113 @@
+﻿<div>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">@ProfileViewModel.UserName</li>
+        <li class="list-group-item">@ProfileViewModel.ProfileQuote</li>
+        <li class="list-group-item">@ProfileViewModel.ReadBooks.Count()</li>
+    </ul>
+</div>
+<div>
+    <div class="container" style="display: flex; flex-wrap: nowrap; justify-content: flex-start; align-items: flex-start; padding: 2.5rem 5%; ">
+        <h4 class="box" style="flex: 0 0 7rem; position: relative; margin: 1rem;">Прочитано</h4>
+        <button class="btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#readbookmodal">+</button>
+    </div>
+
+    <div class="container" style="display: flex; flex-wrap: wrap; justify-content: flex-start; align-items: start; padding: 2.5rem 5%; ">
+        @foreach (var b in @ProfileViewModel.ReadBooks)
+        {
+            <div class="box" style="flex: 0 0 7rem; position: relative; margin: 1rem; min-width: 120px">
+                <div class="card">
+                    <img src="/img/default_cover.png" class="card-img-top rounded-2" alt="Обложка отсутствует" style="max-width: 92%; margin: 10px;">
+                    <div class="card-body">
+                        <a href="/OpenBookPage/@b.BookId" class="d-inline-block text-truncate" style="max-width: 80px;">@b.Title </a>
+                        <p class="card-text">@(b.AuthorSurname + " " + b.AuthorName)</p>
+                        <p class="card-text">@b.PagesCount стр.</p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<div>
+    <div class="container" style="display: flex; flex-wrap: nowrap; justify-content: flex-start; align-items: flex-start; padding: 2.5rem 5%; ">
+        <h4 class="box" style="flex: 0 0 7rem; position: relative; margin: 1rem;">Любимые книги</h4>
+        <h4 class="box btn btn-secondary rounded-5" style="flex: 0 0 1rem; position: relative; margin: 1rem;">+</h4>
+    </div>
+
+    <div class="container" style="display: flex; flex-wrap: wrap; justify-content: flex-start; align-items: start; padding: 2.5rem 5%; ">
+        @foreach (var b in @ProfileViewModel.FavoriteBooks)
+        {
+            <div class="box" style="flex: 0 0 7rem; position: relative; margin: 1rem; min-width: 120px">
+                <div class="card">
+                    <img src="/img/default_cover.png" class="card-img-top rounded-2" alt="Обложка отсутствует" style="max-width: 92%; margin: 10px;">
+                    <div class="card-body">
+                        <a href="/OpenBookPage/@b.BookId" class="d-inline-block text-truncate" style="max-width: 80px;">@b.Title </a>
+                        <p class="card-text">@(b.AuthorSurname + " " + b.AuthorName)</p>
+                        <p class="card-text">@b.PagesCount стр.</p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<div>
+    <div class="container" style="display: flex; flex-wrap: nowrap; justify-content: flex-start; align-items: flex-start; padding: 2.5rem 5%; ">
+        <h4 class="box" style="flex: 0 0 7rem; position: relative; margin: 1rem;">Хочу прочитать</h4>
+        <h4 class="box btn btn-secondary rounded-5" style="flex: 0 0 1rem; position: relative; margin: 1rem;">+</h4>
+    </div>
+
+    <div class="container" style="display: flex; flex-wrap: wrap; justify-content: flex-start; align-items: start; padding: 2.5rem 5%; ">
+        @foreach (var b in @ProfileViewModel.WishBooks)
+        {
+            <div class="box" style="flex: 0 0 7rem; position: relative; margin: 1rem; min-width: 120px">
+                <div class="card">
+                    <img src="/img/default_cover.png" class="card-img-top rounded-2" alt="Обложка отсутствует" style="max-width: 92%; margin: 10px;">
+                    <div class="card-body">
+                        <a href="/OpenBookPage/@b.BookId" class="d-inline-block text-truncate" style="max-width: 80px;">@b.Title </a>
+                        <p class="card-text">@(b.AuthorSurname + " " + b.AuthorName)</p>
+                        <p class="card-text">@b.PagesCount стр.</p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
+<div class="modal" id="readbookmodal" tabindex="-1" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Добавление книг в список</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+            </div>
+            <div class="modal-body">
+
+                <BookSearch SelectedList="SelectedList" />
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                <button type="button" class="btn btn-primary">Сохранить изменения</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    <a class="btn btn-secondary" href="/Logout" style="margin: 4rem;">Выйти из аккаунта</a>
+</div>
+
+@code {
+    [Inject]
+    public ProfileContext ProfileContext { get; set; }
+    [Inject]
+    public MainDataContext MainDataContext { get; set; }
+    [Inject]
+    public HttpContext Context { get; set; }
+    public ProfileViewModel ProfileViewModel => (Context.User.Identity.IsAuthenticated ? 
+        new ProfileViewModel(ProfileContext.UserProfiles.Find(Context.User.Identity.Name)) : 
+        new ProfileViewModel());
+    public string SelectedList { get; set; } = "ReadBooks";
+}

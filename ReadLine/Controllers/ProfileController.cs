@@ -14,8 +14,6 @@ namespace ReadLine.Controllers
         {
             ProfileContext = profileContext;
         }
-
-        public IdentityUser IdentityUser { get; set; }
         public UserProfile Profile { get; set; }
         public async Task<IActionResult> Index()
         {

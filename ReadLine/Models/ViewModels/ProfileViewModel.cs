@@ -13,7 +13,7 @@ namespace ReadLine.Models.ViewModels
         public List<BookViewModel> WishBooks;
         public List<BookViewModel> SearchBooks;
         public bool IsAuthenticated;
-        public string IfSearchModalOpen;
+        public string SelectedList;
 
         public ProfileViewModel()
         {
