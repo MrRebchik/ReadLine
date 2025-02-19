@@ -1,6 +1,17 @@
-﻿namespace ReadLine.Services
+﻿
+
+namespace ReadLine.Services
 {
-    public class UserContext
+    public class UserContext : IUserContext
     {
+        public UserContext()
+        {
+            
+        }
+
+        public HttpContext GetHttpContext()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

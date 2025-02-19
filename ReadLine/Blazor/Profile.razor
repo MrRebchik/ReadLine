@@ -104,10 +104,9 @@
     public ProfileContext ProfileContext { get; set; }
     [Inject]
     public MainDataContext MainDataContext { get; set; }
-    [Inject]
-    public HttpContext Context { get; set; }
-    public ProfileViewModel ProfileViewModel => (Context.User.Identity.IsAuthenticated ? 
-        new ProfileViewModel(ProfileContext.UserProfiles.Find(Context.User.Identity.Name)) : 
-        new ProfileViewModel());
+    
+    [CascadingParameter]
+    public HttpContext? Context { get; set; }
+    public ProfileViewModel ProfileViewModel => new ProfileViewModel(ProfileContext.UserProfiles.Find(Context.User.Identity.Name));
     public string SelectedList { get; set; } = "ReadBooks";
 }
