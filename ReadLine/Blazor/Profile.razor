@@ -84,7 +84,7 @@
             </div>
             <div class="modal-body">
 
-                <BookSearch SelectedList="SelectedList" />
+                <BookSearch SelectedList="@SelectedList" />
 
             </div>
             <div class="modal-footer">
@@ -104,7 +104,6 @@
     public ProfileContext ProfileContext { get; set; }
     [Inject]
     public MainDataContext MainDataContext { get; set; }
-    
     [CascadingParameter]
     public HttpContext? Context { get; set; }
     public ProfileViewModel ProfileViewModel => new ProfileViewModel(ProfileContext.UserProfiles.Find(Context.User.Identity.Name));

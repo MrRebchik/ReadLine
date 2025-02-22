@@ -4,7 +4,6 @@ using ReadLine.Models.People;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using ReadLine.Services;
 
 namespace ReadLine
 {
@@ -46,7 +45,6 @@ namespace ReadLine
             builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
             builder.Services.AddServerSideBlazor();
 
-            //builder.Services.AddTransient<IUserContext, UserContext>();
 
             var app = builder.Build();
 
