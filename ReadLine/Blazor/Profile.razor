@@ -19,7 +19,7 @@
                     <img src="/img/default_cover.png" class="card-img-top rounded-2" alt="Обложка отсутствует" style="max-width: 92%; margin: 10px;">
                     <div class="card-body">
                         <a href="/OpenBookPage/@b.BookId" class="d-inline-block text-truncate" style="max-width: 80px;">@b.Title </a>
-                        <p class="card-text">@(b.AuthorSurname + " " + b.AuthorName)</p>
+                        @* <p class="card-text">@(b.AuthorSurname + " " + b.AuthorName)</p> *@
                         <p class="card-text">@b.PagesCount стр.</p>
                     </div>
                 </div>
@@ -42,7 +42,7 @@
                     <img src="/img/default_cover.png" class="card-img-top rounded-2" alt="Обложка отсутствует" style="max-width: 92%; margin: 10px;">
                     <div class="card-body">
                         <a href="/OpenBookPage/@b.BookId" class="d-inline-block text-truncate" style="max-width: 80px;">@b.Title </a>
-                        <p class="card-text">@(b.AuthorSurname + " " + b.AuthorName)</p>
+                        @* <p class="card-text">@(b.AuthorSurname + " " + b.AuthorName)</p> *@
                         <p class="card-text">@b.PagesCount стр.</p>
                     </div>
                 </div>
@@ -65,7 +65,7 @@
                     <img src="/img/default_cover.png" class="card-img-top rounded-2" alt="Обложка отсутствует" style="max-width: 92%; margin: 10px;">
                     <div class="card-body">
                         <a href="/OpenBookPage/@b.BookId" class="d-inline-block text-truncate" style="max-width: 80px;">@b.Title </a>
-                        <p class="card-text">@(b.AuthorSurname + " " + b.AuthorName)</p>
+                        @* <p class="card-text">@(b.AuthorSurname + " " + b.AuthorName)</p> *@
                         <p class="card-text">@b.PagesCount стр.</p>
                     </div>
                 </div>
@@ -103,7 +103,7 @@
     [Inject]
     public ProfileContext ProfileContext { get; set; }
     [Inject]
-    public MainDataContext MainDataContext { get; set; }
+    public MainDataContext MainDataContext { get; set; } // надо включить авторов в книги
     [CascadingParameter]
     public HttpContext? Context { get; set; }
     public ProfileViewModel ProfileViewModel => new ProfileViewModel(ProfileContext.UserProfiles.Find(Context.User.Identity.Name));

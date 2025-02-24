@@ -11,7 +11,7 @@
     foreach (var b in SearchBooks().Take(30))
     {
         <div class="box" style="flex: 0 0 3rem; position: relative; margin: 1rem; max-width: 170px;">
-            <a href="/Profile/AddBook/@b.BookId">
+            <a href="/Profile/AddBook/@b.BookId?selectedlist=@SelectedList">
                 <div class="card">
                     <img src="/img/default_cover.png" class="card-img-top rounded-2" alt="Обложка отсутствует" style="max-width: 92%; margin: 10px;">
                     <div class="card-body" style="max-width: 150px;">
